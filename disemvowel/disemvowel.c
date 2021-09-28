@@ -5,8 +5,8 @@
 
 #include "disemvowel.h"
 
-bool *isVowel(char test) {
-  bool vowel = false;
+bool isVowel(char test) {
+  bool vowel = true;
 
   switch(tolower(test)) {
     case 'a':
@@ -14,7 +14,7 @@ bool *isVowel(char test) {
     case 'i':
     case 'o':
     case 'u':
-      vowel = true;
+      vowel = false;
       break;
     default :
       break;
@@ -24,15 +24,16 @@ bool *isVowel(char test) {
 }
 
 char *disemvowel(char *str) {
-  char* newString = calloc(strlen(str) + 1, sizeof(str));
+  int len = strlen(str);
+  char *newString = (char*) calloc(len + 1, sizeof(char));
   int placeIndex = 0;
 
-  while (*(str) != "\0") {
-    if(isVowel(str)) {
-      newString[placeIndex++] = str;
+  while (*(str) != '\0') {
+    if(isVowel(*str)) {
+      newString[placeIndex++] = *str;
     }
     str++;
   }
-  newString[placeIndex] = "\0";
+  newString[placeIndex] = '\0';
   return newString;
 }
