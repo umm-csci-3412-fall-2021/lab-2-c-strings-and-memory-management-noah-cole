@@ -1,6 +1,8 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <ctype.h>
+#include <string.h>
+
 #include "disemvowel.h"
 
 bool *isVowel(char test) {
@@ -22,5 +24,15 @@ bool *isVowel(char test) {
 }
 
 char *disemvowel(char *str) {
-  return (char*) "";
+  char* newString = calloc(strlen(str) + 1, sizeof(str));
+  int placeIndex = 0;
+
+  while (*(str) != "\0") {
+    if(isVowel(str)) {
+      newString[placeIndex++] = str;
+    }
+    str++;
+  }
+  newString[placeIndex] = "\0";
+  return newString;
 }
